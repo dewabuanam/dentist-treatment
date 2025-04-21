@@ -1,0 +1,34 @@
+# Dependencies
+/node_modules
+
+# Next.js build output
+/.next
+/out
+
+# Local environment variables
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE specific
+.vscode/
+.idea/
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Optional: if using TypeScript
+*.tsbuildinfo
+
+# Optional: if using pnpm
+.pnpm-debug.log
+
+# Optional: if using TurboRepo or Nx
+/.turbo
