@@ -1,4 +1,3 @@
-```markdown
 # Dental Dashboard
 
 A web application for managing and visualizing dental treatment actions and statistics. Built with **React**, **TypeScript**, and **Supabase**.
