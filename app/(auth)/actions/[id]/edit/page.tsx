@@ -1,6 +1,7 @@
 import { createServerClient } from "@/lib/supabase/server"
 import ActionForm from "../../action-form"
 import { notFound } from "next/navigation"
+import {getSession} from "@/lib/auth";
 
 export default async function EditActionPage({
   params,
@@ -18,8 +19,14 @@ export default async function EditActionPage({
   if (actionError || !action) {
     notFound()
   }
+  const session = await getSession()
+  const userId = session?.userId
 
-  const { data: actionTypes, error: typesError } = await supabase.from("action_types").select("id, name").order("name")
+  if (!userId) {
+    return <p>Unauthorized</p>
+  }
+
+  const { data: actionTypes, error: typesError } = await supabase.from("action_types").select("id, name").eq("created_by", userId).order("name")
 
   if (typesError) {
     console.error("Error fetching action types:", typesError)
