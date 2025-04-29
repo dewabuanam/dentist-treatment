@@ -66,7 +66,7 @@ export default async function DashboardPage() {
     // Fetch detailed action stats
     const { data: actionTypes, error: actionTypesError } = await supabase
       .from("action_types")
-      .select("id, name, target")
+      .select("id, name, target").eq("created_by", userId)
 
     const { data: actionData, error } = await supabase
       .from("dental_actions")

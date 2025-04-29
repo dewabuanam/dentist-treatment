@@ -1,10 +1,20 @@
 import { createServerClient } from "@/lib/supabase/server"
 import ActionForm from "../action-form"
+import {getSession} from "@/lib/auth";
 
 export default async function NewActionPage() {
   const supabase = createServerClient()
 
-  const { data: actionTypes, error } = await supabase.from("action_types").select("id, name").order("name")
+    const session = await getSession()
+    const userId = session?.userId
+
+    if (!userId) {
+        return <p>Unauthorized</p>
+    }
+    const {
+        data: actionTypes,
+        error
+    } = await supabase.from("action_types").select("id, name").eq("created_by", userId).order("name")
 
   if (error) {
     console.error("Error fetching action types:", error)
